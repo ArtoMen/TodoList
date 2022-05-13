@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormCreateComponent } from './form-create/form-create.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CardComponent } from './card/card.component';
 import {CommonModule} from "@angular/common";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -15,6 +15,7 @@ import { FilterTitlePipe } from './pipes/filter-title.pipe';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import { FilterStatusPipe } from './pipes/filter-status.pipe';
+import { FinishedDirective } from './directives/finished.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FilterStatusPipe } from './pipes/filter-status.pipe';
     SortArrayPipe,
     ListComponent,
     FilterTitlePipe,
-    FilterStatusPipe
+    FilterStatusPipe,
+    FinishedDirective
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { FilterStatusPipe } from './pipes/filter-status.pipe';
     MatExpansionModule,
     MatFormFieldModule,
     MatSelectModule,
+    ReactiveFormsModule,
 
   ],
   providers: [],

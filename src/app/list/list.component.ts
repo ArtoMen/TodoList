@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CardService} from "../services/card.service";
 import {Card} from "../app.component";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-list',
@@ -12,6 +13,10 @@ export class ListComponent {
   sort: string = 'statusDown';
   filterTitle: string = '';
   filterStatus: string = 'none';
+
+  findForm: FormGroup = new FormGroup({
+    cardTitle: new FormControl('')
+  });
 
   public cards: Card[] = [];
 
@@ -44,6 +49,10 @@ export class ListComponent {
       card.status = false;
       return card;
     });
+  }
+
+  onSubmit() {
+    this.filterTitle = this.findForm.value.cardTitle;
   }
 
 }

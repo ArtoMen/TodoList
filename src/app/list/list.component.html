@@ -7,14 +7,14 @@
   <div>
     <p class="sorts">
       Sort title:
-      <mat-icon [ngStyle]="{'color': sort === 'titleUp' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'titleUp'" class="button">arrow_downward</mat-icon>
-      <mat-icon [ngStyle]="{'color': sort === 'titleDown' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'titleDown'" class="button">arrow_upward</mat-icon>
+      <mat-icon [style.color]="sort === 'titleUp' ? '#26a5ff' : '#ffffff'" (click)="sort = 'titleUp'" class="button">arrow_downward</mat-icon>
+      <mat-icon [style.color]="sort === 'titleDown' ? '#26a5ff' : '#ffffff'" (click)="sort = 'titleDown'" class="button">arrow_upward</mat-icon>
     </p>
 
     <p class="sorts">
       Sort status:
-      <mat-icon [ngStyle]="{'color': sort === 'statusUp' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'statusUp'" class="button">arrow_downward</mat-icon>
-      <mat-icon [ngStyle]="{'color': sort === 'statusDown' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'statusDown'" class="button">arrow_upward</mat-icon>
+      <mat-icon [style.color]="sort === 'statusUp' ? '#26a5ff' : '#ffffff'" (click)="sort = 'statusUp'" class="button">arrow_downward</mat-icon>
+      <mat-icon [style.color]="sort === 'statusDown' ? '#26a5ff' : '#ffffff'" (click)="sort = 'statusDown'" class="button">arrow_upward</mat-icon>
     </p>
 
     <p>Filter title: </p>
@@ -28,6 +28,13 @@
         <mat-option value="notFinished">Not Finished</mat-option>
       </mat-select>
     </mat-form-field>
+  </div>
+
+  <div>
+    <form [formGroup]="findForm" (ngSubmit)="onSubmit()">
+      <label>Find title: <input type="text" formControlName="cardTitle"></label>
+      <button mat-flat-button type="submit">Find</button>
+    </form>
   </div>
 </div>
 
