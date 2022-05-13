@@ -1,19 +1,14 @@
 <div class="container">
   <h1>Todo List</h1>
-  <app-form-create  (onAdd)="createCard($event)">
-    <button mat-flat-button color="warn" (click)="deleteFinished()">Delete finished</button>
-    <button mat-flat-button color="accent" (click)="UndoDone()">Undo done</button>
+  <app-form-create>
+
   </app-form-create>
+
+  <div class="buttons">
+
+  </div>
+
   <hr>
-  <app-card *ngFor="let card of cards; index as i" [card]="card">
-    <button
-      mat-flat-button
-      (click)="setStatus(i)"
-      [color]="card.status ? 'accent' : 'primary'"
-      [ngClass]="{'green': card.status, 'blue': !card.status}"
-    >
-      {{ card.status ? 'Finish' : 'Not finished' }}
-    </button>
-    <button mat-flat-button color="warn" (click)="deleteCard(i)">Delete</button>
-  </app-card>
+
+  <app-list></app-list>
 </div>

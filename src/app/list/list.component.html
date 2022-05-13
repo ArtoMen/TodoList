@@ -1,0 +1,47 @@
+<div class="buttons">
+  <div>
+    <button mat-flat-button color="warn" (click)="deleteFinished()">Delete finished</button>
+    <button mat-flat-button color="accent" (click)="undoDone()">Undo done</button>
+  </div>
+<!--  #26a5ff-->
+  <div>
+    <p class="sorts">
+      Sort title:
+      <mat-icon [ngStyle]="{'color': sort === 'titleUp' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'titleUp'" class="button">arrow_downward</mat-icon>
+      <mat-icon [ngStyle]="{'color': sort === 'titleDown' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'titleDown'" class="button">arrow_upward</mat-icon>
+    </p>
+
+    <p class="sorts">
+      Sort status:
+      <mat-icon [ngStyle]="{'color': sort === 'statusUp' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'statusUp'" class="button">arrow_downward</mat-icon>
+      <mat-icon [ngStyle]="{'color': sort === 'statusDown' ? '#26a5ff' : '#ffffff'}" (click)="sort = 'statusDown'" class="button">arrow_upward</mat-icon>
+    </p>
+
+    <p>Filter title: </p>
+    <input type="text" placeholder="Enter title" [(ngModel)]="filterTitle">
+    <p>Filter status:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter status</mat-label>
+      <mat-select [(value)]="filterStatus">
+        <mat-option value="none">None</mat-option>
+        <mat-option value="finished">Finished</mat-option>
+        <mat-option value="notFinished">Not Finished</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<hr>
+
+<app-card *ngFor="let card of cards | sortArray:sort | filterTitle:filterTitle | filterStatus:filterStatus" [card]="card">
+  <button
+    mat-flat-button
+    (click)="setStatus(card.id!)"
+    [color]="card.status ? 'accent' : 'primary'"
+    [ngClass]="{'green': card.status, 'blue': !card.status}"
+  >
+    {{ card.status ? 'Finish' : 'Not finished' }}
+  </button>
+  <button mat-flat-button color="warn" (click)="deleteCard(card.id!)">Delete</button>
+</app-card>
+

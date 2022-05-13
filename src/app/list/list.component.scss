@@ -1,0 +1,17 @@
+.sorts {
+  display: flex;
+  align-items: center;
+  padding: 0 0 20px 0;
+}
+
+.buttons div {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin: 0 10px;
+  cursor: pointer;
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -7,12 +7,24 @@ import { CardComponent } from './card/card.component';
 import {CommonModule} from "@angular/common";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule} from "@angular/material/button";
+import { SortArrayPipe } from './pipes/sort-array.pipe';
+import { ListComponent } from './list/list.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { FilterTitlePipe } from './pipes/filter-title.pipe';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import { FilterStatusPipe } from './pipes/filter-status.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    FormCreateComponent
+    FormCreateComponent,
+    SortArrayPipe,
+    ListComponent,
+    FilterTitlePipe,
+    FilterStatusPipe
   ],
   imports: [
     CommonModule,
@@ -20,6 +32,10 @@ import {MatButtonModule} from "@angular/material/button";
     BrowserAnimationsModule,
     FormsModule,
     MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatSelectModule,
 
   ],
   providers: [],

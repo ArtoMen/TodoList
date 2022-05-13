@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {Card} from "../app.component";
+import {CardService} from "../services/card.service";
 
 
 
@@ -9,13 +10,10 @@ import {Card} from "../app.component";
   styleUrls: ['./form-create.component.scss']
 })
 export class FormCreateComponent {
-
-  @Output() onAdd: EventEmitter<Card> = new EventEmitter<Card>();
-
   title: string = '';
   description: string = ''
 
-  constructor() { }
+  constructor(private cardService: CardService) { }
 
   create() {
     if(this.title.trim() && this.description.trim()) {
@@ -24,7 +22,7 @@ export class FormCreateComponent {
         description: this.description,
         status: false
       }
-      this.onAdd.emit(card);
+      this.cardService.addCard(card);
       this.title = this.description = '';
     }
   }
