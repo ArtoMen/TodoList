@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {CardService} from "../services/card.service";
 import {Card} from "../app.component";
 import {FormControl, FormGroup} from "@angular/forms";
+import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -29,7 +30,7 @@ export class ListComponent {
   }
 
   deleteCard(id: number) {
-    this.cards.splice(id, 1);
+    this.cards = this.cards.filter((card) => card.id !== id);
   }
 
   setStatus(id:number) {
@@ -53,6 +54,11 @@ export class ListComponent {
 
   onSubmit() {
     this.filterTitle = this.findForm.value.cardTitle;
+  }
+
+  deleteAll() {
+    const cards$ = interval(1000);
+    cards$.pipe(take(this.cards.length)).subscribe((i: number) => this.deleteCard(i));
   }
 
 }
