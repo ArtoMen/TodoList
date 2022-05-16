@@ -17,7 +17,6 @@ import {MatSelectModule} from "@angular/material/select";
 import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { FinishedDirective } from './directives/finished.directive';
 import {DragDropModule} from "@angular/cdk/drag-drop";
-import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     FilterStatusPipe,
     FinishedDirective,
     FilterStatusPipe,
-    TodoListComponent
   ],
     imports: [
         CommonModule,
