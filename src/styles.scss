@@ -7,7 +7,6 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #3f3f3f;
@@ -20,40 +19,25 @@ body {
   padding-top: 1rem;
 }
 
+
 a {
-  text-decoration: none;
+  color: white;
+  transition: color .5s;
+  &:hover {
+    color: #ff00ff;
+  }
 }
 
-a:hover {
-  color: #666;
-}
 
 ul {
   list-style: none;
-}
-
-img {
-  width: 100%;
 }
 
 button {
   margin-right: 20px !important;
 }
 
-.form-control {
-  display: block;
-  margin-top: 0.3rem;
-}
-
-.card {
-  padding: 1rem;
-  border: #ccc 1px dotted;
-  margin: 0.7rem 0;
-}
-
-input,
-select,
-textarea {
+input {
   display: block;
   width: 100%;
   padding: 0.4rem;
