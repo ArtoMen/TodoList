@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {Card} from "../app.component";
 
 @Pipe({
-  name: 'filterTitle'
+  name: 'filterTitle',
+  pure: false
 })
 export class FilterTitlePipe implements PipeTransform {
 

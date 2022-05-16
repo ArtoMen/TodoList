@@ -3,6 +3,7 @@ import {CardService} from "../services/card.service";
 import {Card} from "../app.component";
 import {FormControl, FormGroup} from "@angular/forms";
 import { interval, take } from 'rxjs';
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-list',
@@ -24,7 +25,7 @@ export class ListComponent {
   constructor(public cardService: CardService) {
     cardService.stream.subscribe((card) => {
       card.id = this.cards.length;
-      this.cards.unshift(card);
+      this.cards.push(card);
       this.cards = [...this.cards];
     })
   }
@@ -61,4 +62,12 @@ export class ListComponent {
     cards$.pipe(take(this.cards.length)).subscribe((i: number) => this.deleteCard(i));
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    if(this.filterTitle.trim()) return;
+    if(this.cards[event.currentIndex].status !== this.cards[event.previousIndex].status) return;
+    const tempCards = [...this.cards];
+    moveItemInArray(tempCards, event.previousIndex, event.currentIndex);
+    this.cards = tempCards;
+    console.log(this.cards);
+  }
 }

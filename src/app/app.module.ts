@@ -16,6 +16,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { FinishedDirective } from './directives/finished.directive';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
   declarations: [
@@ -26,21 +28,24 @@ import { FinishedDirective } from './directives/finished.directive';
     ListComponent,
     FilterTitlePipe,
     FilterStatusPipe,
-    FinishedDirective
+    FinishedDirective,
+    FilterStatusPipe,
+    TodoListComponent
   ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    ReactiveFormsModule,
+    imports: [
+        CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        DragDropModule,
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

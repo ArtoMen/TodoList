@@ -41,15 +41,18 @@
 
 <hr>
 
-<app-card *ngFor="let card of cards | sortArray:sort | filterTitle:filterTitle | filterStatus:filterStatus" [card]="card">
-  <button
-    mat-flat-button
-    (click)="setStatus(card.id!)"
-    [color]="card.status ? 'accent' : 'primary'"
-    [ngClass]="{'green': card.status, 'blue': !card.status}"
-  >
-    {{ card.status ? 'Finish' : 'Not finished' }}
-  </button>
-  <button mat-flat-button color="warn" (click)="deleteCard(card.id!)">Delete</button>
-</app-card>
+<div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+  <app-card cdkDrag *ngFor="let card of cards | sortArray:sort | filterTitle:filterTitle | filterStatus:filterStatus" [card]="card">
+    <button
+      mat-flat-button
+      (click)="setStatus(card.id!)"
+      [color]="card.status ? 'accent' : 'primary'"
+      [ngClass]="{'green': card.status, 'blue': !card.status}"
+    >
+      {{ card.status ? 'Finish' : 'Not finished' }}
+    </button>
+    <button mat-flat-button color="warn" (click)="deleteCard(card.id!)">Delete</button>
+  </app-card>
+</div>
+
 
