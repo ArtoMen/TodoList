@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardService} from "../services/card.service";
-import {Card} from "../app.component";
+import {Card} from "../interfaces/interfaces";
 import {FormControl, FormGroup} from "@angular/forms";
-import { interval, take } from 'rxjs';
+import {interval, take} from 'rxjs';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
@@ -10,7 +10,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
 
   sort: string = 'statusDown';
   filterTitle: string = '';
@@ -22,34 +22,39 @@ export class ListComponent {
 
   public cards: Card[] = [];
 
-  constructor(public cardService: CardService) {
-    cardService.stream.subscribe((card) => {
-      card.id = this.cards.length;
-      this.cards.push(card);
-      this.cards = [...this.cards];
-    })
+  constructor(private cardService: CardService) {
   }
 
-  deleteCard(id: number) {
-    this.cards = this.cards.filter((card) => card.id !== id);
+  ngOnInit(): void {
+    this.cardService.getCards().subscribe(cards => this.cards = cards);
+    this.cardService.getCreating().subscribe(card => this.cards.push(card));
   }
 
-  setStatus(id:number) {
-    console.log(this.cards, id);
-    this.cards = this.cards.map((card) => {
-      if(card.id === id) card.status = !card.status;
-      return card;
+  deleteCard(id: string) {
+    this.cardService.deleteCard(id).subscribe(() => {
+      this.cards = this.cards.filter((card) => card.id !== id);
     });
   }
 
+  setStatus(card: Card) {
+    this.cardService.setStatus(card).subscribe((result) => {
+      this.cards = this.cards.map((c) => {
+        if(c.id === card.id) c.status = result.status;
+        return c;
+      });
+    });
+
+  }
+
   deleteFinished() {
-    this.cards = this.cards.filter((card) => !card.status);
+    this.cards.forEach((card) => {
+      if(card.status) this.deleteCard(card.id!)
+    });
   }
 
   undoDone() {
-    this.cards = this.cards.map((card) => {
-      card.status = false;
-      return card;
+    this.cards.forEach((card) => {
+      if(card.status) this.setStatus(card);
     });
   }
 
@@ -59,7 +64,7 @@ export class ListComponent {
 
   deleteAll() {
     const cards$ = interval(1000);
-    cards$.pipe(take(this.cards.length)).subscribe((i: number) => this.deleteCard(i));
+    cards$.pipe(take(this.cards.length)).subscribe(() => this.deleteCard(this.cards[0].id!));
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -68,6 +73,7 @@ export class ListComponent {
     const tempCards = [...this.cards];
     moveItemInArray(tempCards, event.previousIndex, event.currentIndex);
     this.cards = tempCards;
-    console.log(this.cards);
   }
+
+
 }

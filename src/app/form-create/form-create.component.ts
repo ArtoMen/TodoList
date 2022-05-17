@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Card} from "../app.component";
+import {Card} from "../interfaces/interfaces";
 import {CardService} from "../services/card.service";
 
 
@@ -22,7 +22,7 @@ export class FormCreateComponent {
         description: this.description,
         status: false
       }
-      this.cardService.addCard(card);
+      this.cardService.createCard(card);
       this.title = this.description = '';
     }
   }

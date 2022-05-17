@@ -45,7 +45,7 @@
   <app-card cdkDrag *ngFor="let card of cards | sortArray:sort | filterTitle:filterTitle | filterStatus:filterStatus" [card]="card">
     <button
       mat-flat-button
-      (click)="setStatus(card.id!)"
+      (click)="setStatus(card)"
       [color]="card.status ? 'accent' : 'primary'"
       [ngClass]="{'green': card.status, 'blue': !card.status}"
     >

@@ -21,6 +21,10 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import { AboutComponent } from './about/about.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpErrorInterceptor} from "./interceptors/http-error.interceptor";
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -36,6 +40,7 @@ import { AboutComponent } from './about/about.component';
     FilterStatusPipe,
     TodoListComponent,
     AboutComponent,
+    ErrorPageComponent
   ],
   imports: [
     CommonModule,
@@ -50,10 +55,17 @@ import { AboutComponent } from './about/about.component';
     ReactiveFormsModule,
     DragDropModule,
     RouterModule,
-    AppRoutingModule
-
+    AppRoutingModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
